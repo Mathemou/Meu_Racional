@@ -1,6 +1,6 @@
 # Meu Racional - UFES - 2021
 
-> Esse repositório contém o trabalho de TEP (Tópicos Especiais em Programação) cujo objetivo era criar um TAD Meu Racional, para realizar operações com números racionais em C
+> Esse repositório contém o trabalho de TEP (Tópicos Especiais em Programação) cujo objetivo é criar um TAD Meu Racional, para realizar operações com números racionais em C
 
 
 
