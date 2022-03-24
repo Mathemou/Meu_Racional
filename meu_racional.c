@@ -233,27 +233,30 @@ MeuRacional_pt Racional_constroi (MeuRacional_pt  me,
         &imprime_,
         &destroi_,
         &reduzir_,
-    		&inverter_,
-    		&elevar_quad_,
-    		&elevar_cub_,
-    		&elevar_x_,
-    		&arredonda_cima_,
-    		&arredonda_baixo_,
-    		&arredonda_
+    	&inverter_,
+    	&elevar_quad_,
+    	&elevar_cub_,
+    	&elevar_x_,
+    	&arredonda_cima_,
+    	&arredonda_baixo_,
+    	&arredonda_
      };
 
-         me = (MeuRacional_pt) Num_constroi ((Numero_pt) me);
-                        /*constroi o Numero_t  */
+         //me = (MeuRacional_pt) Num_constroi ((Numero_pt) me);
+		 me = (MeuRacional_pt) malloc (sizeof(MeuRacional_pt));
+                        /* constroi o Numero_t  		   */
                         /* no início de MeuComplexo_t  */
 
          me->super.metodo = &vtbl;
-            /* metodo aponta para vtbl de MeuComplexo_t */
+
+            /* metodo aponta para vtbl de MeuRacional_t         */
             /* as operações do "numero", a partir de agora,     */
-            /* são as operações sobre double                    */
+            /* são as operações sobre long int                  */
 
      /* Agora, mais uma tabela estática a ser compartilhada pelos     *
-      * "MeuComplexo_t": a tabela de interface                          *
+      * "MeuRacional_t": a tabela de interface                        *
       * note que a estrutura Interface incorpora os métodos Get e Set */
+
      static struct MeuRacional_Interface_st const interface = {
         &Copia_,
         &Atribui_,
@@ -276,13 +279,13 @@ MeuRacional_pt Racional_constroi (MeuRacional_pt  me,
         &SetDen_,
         &Modulo_,
         &Reduzir_,
-    		&Inverter_,
-    		&Elevar_Quad_,
-    		&Elevar_Cub_,
-    		&Elevar_X_,
-    		&Arredonda_Cima_,
-    		&Arredonda_Baixo_,
-    		&Arredonda_
+    	&Inverter_,
+    	&Elevar_Quad_,
+    	&Elevar_Cub_,
+    	&Elevar_X_,
+    	&Arredonda_Cima_,
+    	&Arredonda_Baixo_,
+    	&Arredonda_
      };
 
      me->Metodo = &interface;
@@ -302,7 +305,7 @@ MeuRacional_pt Racional_constroi (MeuRacional_pt  me,
 	}
 
 	/* copia os long ints passado como parâmetro */
-    /* no endereco de memoria recém alocado  */
+    /* no endereco de memoria recém alocado  	 */
      me->valor[0] = valorNum;
      me->valor[1] = valorDen;
 

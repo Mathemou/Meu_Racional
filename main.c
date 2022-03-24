@@ -161,7 +161,7 @@ int main ()
   printf("ptC6 reduzido para o valor = %s\n", ptC5->Metodo->imprime (ptC6));
 
   ptC6 = ptC6->Metodo->arredonda(ptC6);
-  printf("ptC6 foi arrendado para = %s\n", ptC6->Metodo->imprime(ptC6));
+  printf("ptC6 foi arrendondado para = %s\n", ptC6->Metodo->imprime(ptC6));
 
   MeuRacional_pt ptC7 = Racional_constroi(ptC7, 23, 20);
   printf("ptC7 foi criado com o valor = %s\n", ptC7->Metodo->imprime (ptC7));
@@ -170,7 +170,7 @@ int main ()
   printf("ptC7 reduzido para o valor = %s (Não é para mudar)\n", ptC7->Metodo->imprime (ptC7));
 
   ptC7 = ptC7->Metodo->arredonda(ptC7);
-  printf("ptC7 foi arrendado para = %s", ptC7->Metodo->imprime(ptC7));
+  printf("ptC7 foi arrendondado para = %s\n\n", ptC7->Metodo->imprime(ptC7));
   
   
   
@@ -182,5 +182,7 @@ int main ()
    ptC5->Metodo->destroi (ptC5);
    ptC6->Metodo->destroi (ptC6);
    ptC7->Metodo->destroi (ptC7);
+
+   printf("FIM");
 	return (0);
 }

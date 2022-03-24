@@ -69,6 +69,22 @@ static  char * Num_imprime_  (Numero_t const * const    me);
 
 static  void   Num_destroi_  (Numero_t  *     me);
 
+static Numero_pt Num_reduzir_ (Numero_t *  me);
+
+static Numero_pt Num_inverter_ (Numero_t * me);
+
+static Numero_pt Num_elevar_quad_ (Numero_t * me);
+
+static Numero_pt Num_elevar_cub_ (Numero_t * me);
+
+static Numero_pt Num_elevar_x_ (Numero_pt * me, int n);
+
+static Numero_pt Num_arredonda_cima_ (Numero_pt * me);
+
+static Numero_pt Num_arredonda_baixo_ (Numero_pt * me);
+
+static Numero_pt Num_arredonda_ (Numero_pt * me);
+
 
 /* --------------------------------------------------------------*
  * implementação do construtor                                   *
@@ -103,7 +119,15 @@ static  void   Num_destroi_  (Numero_t  *     me);
         &Num_ac_divd_,
         &Num_compara_,
         &Num_imprime_,
-        &Num_destroi_
+        &Num_destroi_,
+		&Num_reduzir_,
+		&Num_inverter_,
+		&Num_elevar_quad_,
+		&Num_elevar_cub_,
+		&Num_elevar_x_,
+		&Num_arredonda_cima_,
+		&Num_arredonda_baixo_,
+		&Num_arredonda_
      };
      me->metodo = &vtbl; /*  metodo agora aponta para a vtbl de Numero_t */
 
@@ -247,4 +271,52 @@ static inline char * Num_imprime_  (Numero_t const * const    me)
 static inline void Num_destroi_ (Numero_t * me)
 {
 	/* *free (me); */
+}
+
+static Numero_pt Num_reduzir_ (Numero_t *  me){
+	assert (0);
+	printf ("%p",(void *)me);
+	return (Numero_pt) NULL;
+}
+
+static Numero_pt Num_inverter_ (Numero_t * me){
+	assert (0);
+	printf ("%p",(void *)me);
+	return (Numero_pt) NULL;
+}
+
+static Numero_pt Num_elevar_quad_ (Numero_t * me){
+	assert (0);
+	printf ("%p",(void *)me);
+	return (Numero_pt) NULL;
+}
+
+static Numero_pt Num_elevar_cub_ (Numero_t * me){
+	assert (0);
+	printf ("%p",(void *)me);
+	return (Numero_pt) NULL;
+}
+
+static Numero_pt Num_elevar_x_ (Numero_pt * me, int n){
+	assert (0);
+	printf ("%p",(void *)me);
+	return (Numero_pt) NULL;
+}
+
+static Numero_pt Num_arredonda_cima_ (Numero_pt * me){
+	assert (0);
+	printf ("%p",(void *)me);
+	return (Numero_pt) NULL;
+}
+
+static Numero_pt Num_arredonda_baixo_ (Numero_pt * me){
+	assert (0);
+	printf ("%p",(void *)me);
+	return (Numero_pt) NULL;
+}
+
+static Numero_pt Num_arredonda_ (Numero_pt * me){
+	assert (0);
+	printf ("%p",(void *)me);
+	return (Numero_pt) NULL;
 }
