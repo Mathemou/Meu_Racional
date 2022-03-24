@@ -121,6 +121,20 @@ struct NumeroVtbl {
     void        (*destroi)  (Numero_t       *        me);
 
     Numero_pt 	(*reduzir)	(Numero_t * me);
+
+    Numero_pt (*inverter_) (Numero_t * me);
+
+    Numero_pt (*elevar_quad_) (Numero_t * me);
+
+    Numero_pt (*elevar_cub_) (Numero_t * me);
+
+    Numero_pt (*elevar_x_) (Numero_pt * me, int n);
+
+    Numero_pt (*arredonda_cima_) (Numero_pt * me);
+
+    Numero_pt (*arredonda_baixo_) (Numero_pt * me);
+
+    Numero_pt (*arredonda_) (Numero_pt * me);
 };
 
 typedef struct NumeroVtbl * NumeroVtbl_pt;

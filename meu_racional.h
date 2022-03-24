@@ -124,6 +124,20 @@ struct MeuRacional_Interface_st {
     long double  (*modulo) (MeuRacional_t   const * const me);
 
     MeuRacional_pt (*reduzir)	(MeuRacional_t * me);
+
+    MeuRacional_pt (*inverter) (MeuRacional_t * me);
+
+    MeuRacional_pt (*elevar_quad) (MeuRacional_t * me);
+
+    MeuRacional_pt (*elevar_cub) (MeuRacional_t * me);
+
+    MeuRacional_pt (*elevar_x) (MeuRacional_t * me, int n);
+
+    MeuRacional_pt (*arredonda_cima) (MeuRacional_t * me);
+
+    MeuRacional_pt (*arredonda_baixo) (MeuRacional_t * me);
+
+    MeuRacional_pt (*arredonda) (MeuRacional_t * me);
     /*------------------------------------------------------*/
 };
 

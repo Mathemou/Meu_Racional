@@ -99,7 +99,26 @@ static  char * imprime_  (Numero_t const * const  me);
 
 static  void destroi_ (Numero_t   *   me);
 
+/*-----------------------------------------------*
+ *              Funções bônus!                   *
+ *-----------------------------------------------*/
+
 static Numero_pt reduzir_ (Numero_t *  me);
+
+static Numero_pt inverter_ (Numero_t * me);
+
+static Numero_pt elevar_quad_ (Numero_t * me);
+
+static Numero_pt elevar_cub_ (Numero_t * me);
+
+static Numero_pt elevar_x_ (Numero_pt * me, int n);
+
+static Numero_pt arredonda_cima_ (Numero_pt * me);
+
+static Numero_pt arredonda_baixo_ (Numero_pt * me);
+
+static Numero_pt arredonda_ (Numero_pt * me);
+
 /*-----------------------------------------------------------------------*
  * IMPLEMENTAÇÃO DA INTERFACE PÚBLICA das funções virtuais de MeuRacional*
  * ----------------------------------------------------------------------*/
@@ -169,8 +188,24 @@ static 	void     SetDen_ (MeuRacional_t   * const me,
 static
 long double Modulo_ (MeuRacional_t   const * const me);
 
+//------------------------------------------
+
 static inline
 MeuRacional_pt Reduzir_ (MeuRacional_t * me);
+
+static MeuRacional_pt Inverter_ (MeuRacional_t * me);
+
+static MeuRacional_pt Elevar_Quad_ (MeuRacional_t * me);
+
+static MeuRacional_pt Elevar_Cub_ (MeuRacional_t * me);
+
+static MeuRacional_pt Elevar_X_ (MeuRacional_t * me, int n);
+
+static MeuRacional_pt Arredonda_Cima_ (MeuRacional_t * me);
+
+static MeuRacional_pt Arredonda_Baixo_ (MeuRacional_t * me);
+
+static MeuRacional_pt Arredonda_ (MeuRacional_t * me);
 
  /*---------------------------------------------*
  * implementação do construtor                  *
@@ -197,7 +232,14 @@ MeuRacional_pt Racional_constroi (MeuRacional_pt  me,
         &compara_,
         &imprime_,
         &destroi_,
-        &reduzir_
+        &reduzir_,
+    		&inverter_,
+    		&elevar_quad_,
+    		&elevar_cub_,
+    		&elevar_x_,
+    		&arredonda_cima_,
+    		&arredonda_baixo_,
+    		&arredonda_
      };
 
          me = (MeuRacional_pt) Num_constroi ((Numero_pt) me);
@@ -233,7 +275,14 @@ MeuRacional_pt Racional_constroi (MeuRacional_pt  me,
         &GetDen_,
         &SetDen_,
         &Modulo_,
-        &Reduzir_
+        &Reduzir_,
+    		&Inverter_,
+    		&Elevar_Quad_,
+    		&Elevar_Cub_,
+    		&Elevar_X_,
+    		&Arredonda_Cima_,
+    		&Arredonda_Baixo_,
+    		&Arredonda_
      };
 
      me->Metodo = &interface;
@@ -610,20 +659,6 @@ int Compara_  ( MeuRacional_t const * const  me,
 static  int	compara_ 	(Numero_t const * const  me,
                          Numero_t const * const  outro)
 {
-   /*double diff_real, diff_imag;
-   diff_real = abs(GetNum_((MeuRacional_pt)me) - GetNum_((MeuRacional_pt)outro));
-   diff_imag = abs(GetDen_((MeuRacional_pt)me) - GetDen_((MeuRacional_pt)outro));
-
-    if (   (    diff_real < (DBL_TRUE_MIN * 256.0))
-        && (    diff_imag < (DBL_TRUE_MIN * 256.0)))
-    {return (0);}
-
-	if( Modulo_((MeuRacional_pt)me) > Modulo_((MeuRacional_pt)outro) )
-	{ return (1);}
-	else if( Modulo_((MeuRacional_pt)me) < Modulo_((MeuRacional_pt)outro) )
-	{  return (-1);};
-
-	return(0);*/
 
 	if(
 	GetNum_((MeuRacional_pt)me)
@@ -657,7 +692,11 @@ char * Imprime_  ( MeuRacional_t const * const  me)
 static  char * imprime_  (Numero_t const * const  me)
 {
     static char buffer[50];
-       sprintf(buffer, "%ld/%ld",GetNum_((MeuRacional_pt) me),GetDen_((MeuRacional_pt) me));
+		if(GetNum_((MeuRacional_pt) me)%GetDen_((MeuRacional_pt) me)==0){
+			sprintf(buffer, "%ld",GetNum_((MeuRacional_pt) me)/GetDen_((MeuRacional_pt) me));
+		} else {
+       		sprintf(buffer, "%ld/%ld",GetNum_((MeuRacional_pt) me),GetDen_((MeuRacional_pt) me));
+		}
 	return buffer;
 }
 
@@ -684,8 +723,9 @@ static void destroi_ (Numero_t *  me)
  *----------------- |*/
 static inline
 MeuRacional_pt Reduzir_ (MeuRacional_t * me){
-  reduzir_ ((Numero_t *) me);
+  return (MeuRacional_pt)reduzir_((Numero_pt) me);
 }
+
 static Numero_pt reduzir_ (Numero_t * me){
   if(GetNum_((MeuRacional_pt)me)%2==0&&GetDen_((MeuRacional_pt)me)%2==0){
     Set_((MeuRacional_pt) me,
@@ -716,4 +756,120 @@ static Numero_pt reduzir_ (Numero_t * me){
   }
 }
 
-//||GetNum_((MeuRacional_pt)me)%3==0||GetNum_((MeuRacional_pt)me)%5==0||GetNum_((MeuRacional_pt)me)%7==0){
+//-----------------------------------------------
+static inline
+MeuRacional_pt Inverter_ (MeuRacional_t * me){
+	return (MeuRacional_pt)inverter_((Numero_t *) me);
+}
+
+static Numero_pt inverter_ (Numero_t * me){
+	Set_((MeuRacional_pt) me,
+				GetDen_((MeuRacional_pt) me)
+				,
+				/*-----------------------------------------------------------*/
+				GetNum_((MeuRacional_pt) me) );
+
+	return ((Numero_pt)me);
+}
+
+
+//-----------------------------------------------
+static inline
+MeuRacional_pt Elevar_Quad_ (MeuRacional_t * me){
+	return (MeuRacional_pt)elevar_quad_((Numero_t*) me);
+}
+
+static Numero_pt elevar_quad_ (Numero_t * me){
+	Set_((MeuRacional_pt) me,
+							GetNum_((MeuRacional_pt) me) * GetNum_((MeuRacional_pt) me),
+							GetDen_((MeuRacional_pt) me) * GetDen_((MeuRacional_pt) me)
+	);
+	return ((Numero_pt)me);
+}
+
+//--------------------------------------------
+static inline
+MeuRacional_pt Elevar_Cub_ (MeuRacional_t * me){
+	return (MeuRacional_pt)elevar_cub_((Numero_t*)me);
+}
+static Numero_pt elevar_cub_ (Numero_t * me){
+	Set_((MeuRacional_pt) me,
+							GetNum_((MeuRacional_pt) me) * GetNum_((MeuRacional_pt) me) * GetNum_((MeuRacional_pt) me),
+							GetDen_((MeuRacional_pt) me) * GetDen_((MeuRacional_pt) me) * GetDen_((MeuRacional_pt) me)
+	);
+	return ((Numero_pt)me);
+}
+//-----------------------------------------------------
+static inline
+MeuRacional_pt Elevar_X_ (MeuRacional_t * me, int n){
+	return (MeuRacional_pt)elevar_x_((Numero_pt*)me, n);
+}
+
+static Numero_pt elevar_x_ (Numero_pt * me, int n){
+  long int num0 = GetNum_((MeuRacional_pt) me);
+  long int den0 = GetDen_((MeuRacional_pt) me);
+	for(int i=0; i<n; i++){
+		Set_((MeuRacional_pt) me,
+							GetNum_((MeuRacional_pt) me) * num0,
+							GetDen_((MeuRacional_pt) me) * den0
+	);
+	}
+	return ((Numero_pt)me);
+}
+//---------------------------------------------------
+static inline
+MeuRacional_pt Arredonda_Cima_ (MeuRacional_t * me){
+	return (MeuRacional_pt) arredonda_cima_((Numero_pt*)me);
+}
+
+static Numero_pt arredonda_cima_ (Numero_pt * me){
+  
+	if(GetNum_((MeuRacional_pt)me)%GetDen_((MeuRacional_pt)me)!=0){
+		Set_((MeuRacional_pt) me,
+							GetNum_((MeuRacional_pt) me) + 1,
+							GetDen_((MeuRacional_pt) me)
+	);
+	arredonda_cima_(me);
+	}
+	return ((Numero_pt)me);
+}
+
+//---------------------------
+static inline
+MeuRacional_pt Arredonda_Baixo_ (MeuRacional_t * me){
+	return (MeuRacional_pt)arredonda_baixo_((Numero_pt*)me);
+}
+
+static Numero_pt arredonda_baixo_ (Numero_pt * me){
+	if(GetNum_((MeuRacional_pt)me)%GetDen_((MeuRacional_pt)me)!=0){
+		Set_((MeuRacional_pt) me,
+							GetNum_((MeuRacional_pt) me) - 1,
+							GetDen_((MeuRacional_pt) me)
+	);
+	if (GetNum_((MeuRacional_pt)me)==0){
+		Set_((MeuRacional_pt) me,
+							0,
+							GetDen_((MeuRacional_pt) me)
+	);
+	} else {
+		arredonda_baixo_(me);
+	}
+	}
+	return ((Numero_pt)me);
+}
+//----------------------------------------------
+static inline
+MeuRacional_pt Arredonda_ (MeuRacional_t * me){
+	return (MeuRacional_pt) arredonda_((Numero_pt*)me);
+}
+
+static Numero_pt arredonda_ (Numero_pt * me){
+	
+	
+	if (GetNum_((MeuRacional_pt)me)%GetDen_((MeuRacional_pt)me)<GetDen_((MeuRacional_pt)me)/2){
+		arredonda_baixo_((Numero_pt*) me);
+	} else {
+		arredonda_cima_((Numero_pt*) me);
+	}
+	return ((Numero_pt)me);
+}
