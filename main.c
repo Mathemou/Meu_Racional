@@ -15,16 +15,16 @@ int main ()
 	 * MeuDouble_pt */
 
 
-	ptC1 = Racional_constroi (ptC1, 1, 2); // ptC1 = 5/20
+	ptC1 = Racional_constroi (ptC1, 1, 2);
 
-	ptC2 = ptC1->Metodo->copia (ptC1); // ptC2 = 5/20
+	ptC2 = ptC1->Metodo->copia (ptC1);
 
 	printf ("Os dois numeros sao %s %s \n",
 				ptC1->Metodo->imprime (ptC1),
 				ptC2->Metodo->imprime (ptC2));
 
-    ptC3 = Racional_constroi (ptC3, 1, 4); // ptC3 = 1/4
-    ptC3 = ptC2->Metodo->atribui (ptC2, ptC3); // ptC3 = 5/20
+    ptC3 = Racional_constroi (ptC3, 1, 4); 
+    ptC3 = ptC2->Metodo->atribui (ptC2, ptC3);
     ptC3 = ptC3->Metodo->reduzir(ptC3);
     printf ("ptC3 recebeu o valor de Y2 = %s \n",
 				ptC3->Metodo->imprime (ptC3));
